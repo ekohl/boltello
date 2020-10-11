@@ -1,0 +1,9 @@
+{
+  "description": "Remove errant packages",
+  "parameters": {
+    "packages": {
+      "type": "String",
+      "description": "Packages to be removed"
+    }
+  }
+}
