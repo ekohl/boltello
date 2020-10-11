@@ -98,7 +98,7 @@ __Generating a CSR__
 __Certificate Management__
 
   * Katello comes with a suite of [certificate management](https://theforeman.org/plugins/katello/nightly/advanced/certificates.html) tools
-  * Katello/Capsule server certificates are generated with the [katello/certs module](https://forge.puppet.com/katello/certs) 
+  * Katello/Capsule server certificates are generated with the [katello/certs](https://forge.puppet.com/katello/certs) and [puppet/trusted_ca](https://forge.puppet.com/puppet/trusted_ca) modules
   * Puppet certificates are generated via a Bolt task which adds custom subject alternative names to the CSR 
   * Once certificates are generated via Puppet module and task, they're shipped to their respective host for deployment using Bolt's 'upload_file' method
   * Use Katello certificate tools for managing certificates after installtion and initial configuration
