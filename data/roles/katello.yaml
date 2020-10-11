@@ -18,7 +18,7 @@
     'require_ssl_smart_proxies':
       'name': 'require_ssl_smart_proxies'
       'value': "%{alias('boltello::require_ssl_smart_proxies')}"
-  - 
+  -
     'restrict_registered_smart_proxies':
       'name': 'restrict_registered_smart_proxies'
       'value': "%{alias('boltello::restrict_registered_smart_proxies')}"
@@ -187,38 +187,6 @@
 'foreman_proxy::register_in_foreman': true
 'foreman_proxy::foreman_base_url': 'https://%{trusted.certname}'
 'foreman_proxy::plugin::remote_execution::ssh::generate_keys': true
-'foreman_proxy_content::parent_fqdn': '%{trusted.certname}'
-'foreman_proxy_content::pulp_admin_password': "%{alias('boltello::pulp_admin_password')}"
-'foreman_proxy_content::pulp_max_speed':
-'foreman_proxy_content::pulp_num_workers':
-'foreman_proxy_content::pulp_proxy_password':
-'foreman_proxy_content::pulp_proxy_port':
-'foreman_proxy_content::pulp_proxy_url':
-'foreman_proxy_content::pulp_proxy_username':
-'foreman_proxy_content::pulp_puppet_wsgi_processes': 1
-'foreman_proxy_content::pulp_ca_cert':
-'foreman_proxy_content::pulp_worker_timeout': 60
-'foreman_proxy_content::puppet': true
-'foreman_proxy_content::reverse_proxy': false
-'foreman_proxy_content::reverse_proxy_port': 8443
-'foreman_proxy_content::ssl_protocol':
-'foreman_proxy_content::rhsm_hostname':
-'foreman_proxy_content::rhsm_url': "/rhsm"
-'foreman_proxy_content::qpid_router': true
-'foreman_proxy_content::qpid_router_hub_addr':
-'foreman_proxy_content::qpid_router_hub_port': 5646
-'foreman_proxy_content::qpid_router_agent_addr':
-'foreman_proxy_content::qpid_router_agent_port': 5647
-'foreman_proxy_content::qpid_router_broker_addr': localhost
-'foreman_proxy_content::qpid_router_broker_port': 5671
-'foreman_proxy_content::qpid_router_logging_level': info+
-'foreman_proxy_content::qpid_router_logging': syslog
-'foreman_proxy_content::qpid_router_logging_path': "/var/log/qdrouterd"
-'foreman_proxy_content::qpid_router_ssl_ciphers':
-'foreman_proxy_content::qpid_router_ssl_protocols':
-'foreman_proxy_content::qpid_router_sasl_mech': PLAIN
-'foreman_proxy_content::qpid_router_sasl_username': "%{alias('boltello::qpid_router_sasl_username')}"
-'foreman_proxy_content::qpid_router_sasl_password': "%{alias('boltello::qpid_router_sasl_password')}"
 'foreman_proxy_content::manage_broker': true
 'foreman_proxy_content::pulpcore_manage_postgresql': true
 'foreman_proxy_content::pulpcore_postgresql_host': localhost
@@ -236,10 +204,10 @@
 'foreman_proxy_content::pulpnode_enabled': false
 'foreman_proxy_content::pulpcore_enabled': true
 'foreman_proxy_content::pulpcore_api_url': 'https://%{trusted.certname}'
-'foreman_proxy_content::pulpcore_content_url': 'https://%{trusted.certname}/pulp/content'
+'foreman_proxy_content::pulpcore_content_url': "https://%{trusted.certname}/pulp/content"
 'foreman_proxy_content::pulpcore_mirror': false
 'foreman_proxy_content::version':
-'foreman_proxy_content::pulp_url': 'https://%{trusted.certname}/pulp'
+'foreman_proxy_content::pulp_url': "https://%{trusted.certname}/pulp"
 'foreman_proxy_content::pulp_dir': "/var/lib/pulp"
 'foreman_proxy_content::pulp_content_dir': "/var/lib/pulp/content"
 'foreman_proxy_content::puppet_content_dir':
