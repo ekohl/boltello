@@ -54,7 +54,7 @@ class boltello_builder::foreman_proxy (
     }
 
     exec { 'add_to_authorized_keys':
-      command => "/bin/cat ${ssh_identity_dir}/${ssh_identity_file}.pub >> /root/.ssh/authroized_keys",
+      command => "/bin/cat ${ssh_identity_dir}/${ssh_identity_file}.pub >> /root/.ssh/authorized_keys",
       unless  => "/bin/grep foreman-proxy@${katello_server} /root/.ssh/authorized_keys",
       notify  => Service['foreman-proxy'],
     }
