@@ -2,7 +2,7 @@
 #
 class boltello_builder::versionlock (
   Enum['locked', 'unlock'] $lock_status,
-){
+) {
   $target = '/etc/yum/pluginconf.d/versionlock.list'
 
   $versionlock_packages = $lock_status ? {
@@ -22,14 +22,14 @@ class boltello_builder::versionlock (
     }
   }
 
-  concat { "${target}":
-    require => Package['yum-plugin-versionlock'],
+  concat { $target:
     ensure  => present,
+    require => Package['yum-plugin-versionlock'],
   }
 
   Concat::Fragment {
-    target => "${target}",
-    notify => Exec['refresh_yum']
+    target => $target,
+    notify => Exec['refresh_yum'],
   }
 
   concat::fragment { 'versionlock_header':
@@ -39,18 +39,17 @@ class boltello_builder::versionlock (
 
   $versionlock_packages.reduce(0) |Integer $order, Tuple $elements| {
     Hash($elements).each |String $package, String $version| {
-      $versionlock = { "versionlock-${package}-${version}" => {
+      concat::fragment { "versionlock-${package}-${version}":
         content => "${order}:${package}-${version}*\n",
         order   => $order,
-      }}
-      create_resources(concat::fragment, $versionlock)
+      }
     }
     $order+1
   }
 
   exec { 'refresh_yum':
     command     => '/bin/yum clean plugins',
-    require     => Concat["${target}"],
+    require     => Concat[$target],
     refreshonly => true,
   }
 }

@@ -1,8 +1,8 @@
 # == Class boltello_builder:pulp
 #
 class boltello_builder::pulp {
-  include ::foreman_proxy::plugin::pulp
-  include ::foreman_proxy_content
+  include foreman_proxy::plugin::pulp
+  include foreman_proxy_content
 
   selinux::port { 'allow_crane_port':
     ensure   => 'present',

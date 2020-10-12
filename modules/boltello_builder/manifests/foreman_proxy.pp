@@ -8,27 +8,27 @@ class boltello_builder::foreman_proxy (
   Integer $ssl_port,
   String $ssh_identity_dir,
   String $ssh_identity_file,
-){
-  # require ::foreman
-  include ::foreman_proxy
+) {
+  # require foreman
+  include foreman_proxy
 
   if $enable_remote_execution {
-    include ::foreman_proxy::plugin::remote_execution::ssh
+    include foreman_proxy::plugin::remote_execution::ssh
 
     Exec {
-      require => Class['::foreman_proxy::plugin::remote_execution::ssh'],
+      require => Class['foreman_proxy::plugin::remote_execution::ssh'],
     }
 
     exec { 'ensure_ssh_identity_dirs':
       command => "/bin/mkdir -p {'${ssh_identity_dir}','${foreman_proxy_dir}'} && /bin/chown foreman-proxy:foreman-proxy {'${ssh_identity_dir}','${foreman_proxy_dir}'}",
-      creates => ["${ssh_identity_dir}", "${foreman_proxy_dir}"],
+      creates => [$ssh_identity_dir, $foreman_proxy_dir],
     }
 
     # https://access.redhat.com/solutions/4282171
     file { 'ensure_ssh_hidden_dir':
-      path    => "${foreman_proxy_dir}/.ssh",
       ensure  => link,
-      target  => "${ssh_identity_dir}",
+      path    => "${foreman_proxy_dir}/.ssh",
+      target  => $ssh_identity_dir,
       notify  => Exec['restorecon_ssh_hidden_dir'],
       require => Exec['ensure_ssh_identity_dirs'],
     }

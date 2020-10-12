@@ -5,9 +5,9 @@ class boltello_builder::foreman (
   Array[String] $trusted_hosts = [],
   Array[Hash] $foreman_config_entries = [{}],
   Boolean $enable_remote_execution = undef
-){
-  include ::foreman
-  include ::foreman::cli
+) {
+  include foreman
+  include foreman::cli
 
   # Only include REX if enabled in Hiera
   if $enable_remote_execution {
@@ -39,7 +39,7 @@ class boltello_builder::foreman (
 
   # Manage Foreman's ignored_environments.yml file
   file { '/usr/share/foreman/config/ignored_environments.yml':
-    ensure => $ignored_environments.empty() ? {
+    ensure  => $ignored_environments.empty() ? {
       true    => absent,
       default => present
     },

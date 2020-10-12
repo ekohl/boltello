@@ -7,7 +7,7 @@
 #
 class boltello_builder (
   String[1] $message,
-  Array[String] $classes
+  Array[String] $classes,
 ) {
   # Greeting/server profile
   notice("${message}: ${facts['networking']['fqdn']}")
@@ -17,7 +17,7 @@ class boltello_builder (
 
   # Ensure nginx
   unless $facts['boltello_role'] == 'proxy' {
-    package { 'nginx': 
+    package { 'nginx':
       ensure => absent,
     }
   }
